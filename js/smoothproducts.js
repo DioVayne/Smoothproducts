@@ -79,9 +79,13 @@
             // Open in Lightbox
 
             $(document.body).on('click', '.sp-full-screen', function(event) {
-                var currentImg = $(this).parent().find('.sp-large .sp-zoom').html();
-                $('body').append("<div class='sp-lightbox'>"+currentImg+"</div>");
-                $('.sp-lightbox').fadeIn();
+                if(typeof $.fancybox == 'function') {
+                    $.fancybox($('.sp-tb-active a'), { 'closeClick': true, 'type': 'image', 'index': $('.sp-current').index() });
+                } else {
+                    var currentImg = $(this).parent().find('.sp-large .sp-zoom').html();
+                    $('body').append("<div class='sp-lightbox'>" + currentImg + "</div>");
+                    $('.sp-lightbox').fadeIn();
+                }
             });
 
             // Close Lightbox
